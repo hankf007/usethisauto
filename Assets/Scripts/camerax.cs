@@ -17,7 +17,7 @@ public class camerax : MonoBehaviour
     public Transform target;
 
     public Transform player;
-
+    
 
 
     void Start()

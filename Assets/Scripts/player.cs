@@ -37,6 +37,8 @@ public class player : MonoBehaviour
 
     public GameObject scopecam;
 
+    bool holdingDown;
+
 
 
 
@@ -63,6 +65,8 @@ public class player : MonoBehaviour
 
             if (Input.GetKey(KeyCode.W))
             {
+                //rb.velocity= (Vector3.forward * moveforwardspeed * Time.deltaTime);
+                //rb.AddForce(this.transform.forward * moveforwardspeed, ForceMode.Force);
                 transform.Translate(Vector3.forward * moveforwardspeed * Time.deltaTime);
 
 
@@ -70,6 +74,8 @@ public class player : MonoBehaviour
 
             else if (Input.GetKey(KeyCode.S))
             {
+                //rb.velocity = (Vector3.back * movebackwardspeed * Time.deltaTime);
+                //rb.AddForce(-this.transform.forward * movebackwardspeed, ForceMode.Force);
                 transform.Translate(Vector3.back * movebackwardspeed * Time.deltaTime);
 
 
@@ -77,15 +83,17 @@ public class player : MonoBehaviour
 
             else if (Input.GetKey(KeyCode.A))
             {
+                //rb.velocity = (Vector3.left * movebackwardspeed * Time.deltaTime);
+                //rb.AddForce(-this.transform.right * movebackwardspeed, ForceMode.Force);
                 transform.Translate(Vector3.left * movebackwardspeed * Time.deltaTime);
             }
 
             else if (Input.GetKey(KeyCode.D))
             {
+                //rb.velocity = (Vector3.right * movebackwardspeed * Time.deltaTime);
+                //rb.AddForce(this.transform.right * movebackwardspeed, ForceMode.Force);
                 transform.Translate(Vector3.right * movebackwardspeed * Time.deltaTime);
             }
-
-
 
 
             if (Input.GetKeyDown(KeyCode.Space) && isjumping == false)//jump
@@ -98,6 +106,32 @@ public class player : MonoBehaviour
 
             }
 
+
+
+            if (Input.anyKey)
+            {
+                //A key is being pressed"
+                holdingDown = true;
+            }
+
+            if (!Input.anyKey && holdingDown)
+            {
+                //A key was released"
+                holdingDown = false;
+            }
+
+            if (holdingDown == false)
+            {
+                Vector3 vel = rb.velocity;
+                vel.x = 0f;
+                vel.z = 0f;
+                rb.velocity = vel;
+            }
+
+
+
+
+           
         }
 
         //if (isRotating) //Check if your game object is currently rotating
@@ -145,7 +179,7 @@ public class player : MonoBehaviour
     void SetRotate(GameObject toRotate, GameObject camera)
     {//rotate camera
         //You can call this function for any game object and any camera, just change the parameters when you call this function
-        transform.rotation = Quaternion.Lerp(toRotate.transform.rotation, camera.transform.rotation, RotateSpeed * Time.deltaTime);
+       rb.rotation = Quaternion.Lerp(toRotate.transform.rotation, camera.transform.rotation, RotateSpeed * Time.deltaTime);
     }
 
 
