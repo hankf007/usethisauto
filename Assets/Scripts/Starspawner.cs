@@ -41,7 +41,7 @@ public class Starspawner : MonoBehaviour
     void Start()
     {
         SetRanges();
-        InvokeRepeating("InstantiateRandomObjects", 1f, 2f);
+       // InvokeRepeating("InstantiateRandomObjects", 1f, 2f);
     }
      void Update()
     {
@@ -94,6 +94,16 @@ public class Starspawner : MonoBehaviour
 
 
 
+    }
+
+    public void startInvoke()
+    {
+        InvokeRepeating("InstantiateRandomObjects", 1f, 2f);
+    }
+
+    public void stopInvoke()
+    {
+        CancelInvoke();
     }
 }
 

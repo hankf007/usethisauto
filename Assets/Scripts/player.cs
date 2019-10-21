@@ -39,7 +39,10 @@ public class player : MonoBehaviour
 
     bool holdingDown;
 
+    public Material blacksky;
+    public Material nightsky;
 
+    public GameObject starspawner;
 
 
     void Start()
@@ -49,7 +52,9 @@ public class player : MonoBehaviour
 
         scopecam.SetActive(false);
 
-       
+       // starspawner.SetActive(false);//turn off star spawner
+
+
     }
 
     // Update is called once per frame
@@ -144,7 +149,9 @@ public class player : MonoBehaviour
 
                 if (scopeon == false)//not already opened
                 {
-
+                    RenderSettings.skybox = nightsky; //change skybox
+                    //  starspawner.SetActive(true);//turn on starspawner
+                    starspawner.SendMessage("startInvoke");
 
                     scope.enabled = true;
 
@@ -155,6 +162,12 @@ public class player : MonoBehaviour
 
                 if (startTime + holdTime <= Time.time) //hold to exit
                 {
+                    RenderSettings.skybox = blacksky; //change skybox
+                    // starspawner.SetActive(false);//turn off star spawner
+                    starspawner.SendMessage("stopInvoke");
+
+                    Destroy(GameObject.FindWithTag("Star"));//destroy all remaining stars
+
                     scope.enabled = false;
 
                     scopeon = false;
