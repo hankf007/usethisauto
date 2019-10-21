@@ -5,14 +5,7 @@ using UnityEngine;
 public class shootingstar : MonoBehaviour
 {
     SpriteRenderer rend;
-
-    public float x1;
-    public float x2;
-    public float y;
-    public float z1;
-    public float z2;
-
-
+    public Vector3 moveVec;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,23 +16,19 @@ public class shootingstar : MonoBehaviour
 
 
         StartCoroutine("InOut");
-
-
-        var rb = GetComponent<Rigidbody>();
-        rb.velocity = new Vector3 (Random.Range(x1,x2),y,Random.Range(z1,z2));
-
     }
 
     // Update is called once per frame
     void Update()
     {
-       
+        transform.Translate( moveVec  * Time.deltaTime);
     }
+
 
     IEnumerator InOut()
     {
         StartCoroutine("FadeIn");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         StartCoroutine("FadeOut");
         yield return new WaitForSeconds(2f);
         Destroy(gameObject);

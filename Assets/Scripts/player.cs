@@ -43,6 +43,8 @@ public class player : MonoBehaviour
     public Material nightsky;
 
     public GameObject starspawner;
+    public GameObject sssleft; //shootingstarspawner
+    public GameObject sssright;
 
 
     void Start()
@@ -152,6 +154,8 @@ public class player : MonoBehaviour
                     RenderSettings.skybox = nightsky; //change skybox
                     //  starspawner.SetActive(true);//turn on starspawner
                     starspawner.SendMessage("startInvoke");
+                    sssleft.SendMessage("startInvoke");
+                    sssright.SendMessage("startInvoke");
 
                     scope.enabled = true;
 
@@ -165,6 +169,8 @@ public class player : MonoBehaviour
                     RenderSettings.skybox = blacksky; //change skybox
                     // starspawner.SetActive(false);//turn off star spawner
                     starspawner.SendMessage("stopInvoke");
+                    sssleft.SendMessage("stopInvoke");
+                    sssright.SendMessage("stopInvoke");
 
                     Destroy(GameObject.FindWithTag("Star"));//destroy all remaining stars
 

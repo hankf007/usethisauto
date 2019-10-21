@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Starspawner : MonoBehaviour
+public class shootingstarspawnerleft : MonoBehaviour
 {
     public Vector3 Min1;
     public Vector3 Max1;
@@ -41,9 +41,10 @@ public class Starspawner : MonoBehaviour
     void Start()
     {
         SetRanges();
-       // InvokeRepeating("InstantiateRandomObjects", 1f, 2f);
+        //InvokeRepeating("InstantiateRandomObjects", 1f, 5f);
+        //InvokeRepeating("InstantiateRandomObjects2", 3.5f, 5f);
     }
-     void Update()
+    void Update()
     {
         _xAxis1 = UnityEngine.Random.Range(Min1.x, Max1.x);
         _yAxis1 = UnityEngine.Random.Range(Min1.y, Max1.y);
@@ -68,28 +69,41 @@ public class Starspawner : MonoBehaviour
 
     }
     //Here put the ranges where your object will appear, or put it in the inspector.
-     void SetRanges()
+    void SetRanges()
     {
-        Min1 = new Vector3(1000, 500, -500); //Random value.
-        Max1 = new Vector3(1000, 1000, 500); 
+        Min1 = new Vector3(1000, 1000, -500); //Random value.
+        Max1 = new Vector3(1000, 1500, 500);
 
-        Min2 = new Vector3(-1000, 500, -500);
-        Max2 = new Vector3(-1000, 1000, 500);
+        Min2 = new Vector3(-1000, 1000, -500);
+        Max2 = new Vector3(-1000, 1500, 500);
 
-        Min3 = new Vector3(-500, 500, -1000);
-        Max3 = new Vector3(500, 1000, -1000);
+        Min3 = new Vector3(-500, 1000, -1000);
+        Max3 = new Vector3(500, 1500, -1000);
 
-        Min4 = new Vector3(-500, 500, 1000);
-        Max4 = new Vector3(500, 1000, 1000);
+        Min4 = new Vector3(-500, 1000, 1000);
+        Max4 = new Vector3(500, 1500, 1000);
     }
-     void InstantiateRandomObjects()
+    void InstantiateRandomObjects()
     {
        // if (_canInstantiate)
         {
             Instantiate(star1, _randomPosition1, Quaternion.identity);
+            
+            Instantiate(star2, _randomPosition4, Quaternion.identity);
+        }
+
+
+
+    }
+
+    void InstantiateRandomObjects2()
+    {
+       // if (_canInstantiate)
+        {
+          
             Instantiate(star1, _randomPosition2, Quaternion.identity);
             Instantiate(star2, _randomPosition3, Quaternion.identity);
-            Instantiate(star2, _randomPosition4, Quaternion.identity);
+          
         }
 
 
@@ -98,7 +112,8 @@ public class Starspawner : MonoBehaviour
 
     public void startInvoke()
     {
-        InvokeRepeating("InstantiateRandomObjects", 1f, 2f);
+        InvokeRepeating("InstantiateRandomObjects", 1f, 5f);
+        InvokeRepeating("InstantiateRandomObjects2", 3.5f, 5f);
     }
 
     public void stopInvoke()
@@ -106,4 +121,3 @@ public class Starspawner : MonoBehaviour
         CancelInvoke();
     }
 }
-
